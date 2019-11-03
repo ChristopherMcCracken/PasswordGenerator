@@ -4,13 +4,13 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 
-def generateKey(url):
+def generateKey(url, passwordSize):
     password_provided = url   # This is input in the form of a string
     password = password_provided.encode()  # Convert to type bytes
     salt = b'salt_'  # might also want to make this unique per each password
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
-        length=32,
+        length=passwordSize,
         salt=salt,
         iterations=100000,
         backend=default_backend()
