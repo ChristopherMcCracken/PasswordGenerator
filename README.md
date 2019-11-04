@@ -66,3 +66,7 @@ Allowing for strong, unique passwords across multiple
 websites without the need to remember numerous 
 passwords, while storing no passwords 
 directly anywhere.
+
+**Links:**
+https://pypi.org/project/face_recognition/
+https://github.com/ageitgey/face_recognition/issues/175
