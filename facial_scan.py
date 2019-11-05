@@ -38,10 +38,8 @@ contouring = imutils.grab_contours(contouring)
 (contouring, _) = contours.sort_contours(contouring)    # sort by left to right
 pixelsPerMetric = None
 
-# loop over the contours individually
-for c in contouring:
-    # if the contour is not sufficiently large, ignore it
-    if cv2.contourArea(c) < 100:
+for c in contouring:                                    # loop over each countour
+    if cv2.contourArea(c) < 100:                        #if too big it will be ignored
         continue
 
     # compute the rotated bounding box of the contour
@@ -60,18 +58,16 @@ for c in contouring:
     (tltrX, tltrY) = mid_point(tl, tr)
     (blbrX, blbrY) = mid_point(bl, br)
 
-    # compute the midpoint between the top-left and top-right points,
-    # followed by the midpoint between the top-righ and bottom-right
-    (tlblX, tlblY) = mid_point(tl, bl)
-    (trbrX, trbrY) = mid_point(tr, br)
+    (tlblX, tlblY) = mid_point(tl, bl)                  #top left to bottom left
+    (trbrX, trbrY) = mid_point(tr, br)                  #top right to bottom right
 
-    # draw the midpoints on the image
+    # draw midpoints
     cv2.circle(orig, (int(tltrX), int(tltrY)), 5, (255, 0, 0), -1)
     cv2.circle(orig, (int(blbrX), int(blbrY)), 5, (255, 0, 0), -1)
     cv2.circle(orig, (int(tlblX), int(tlblY)), 5, (255, 0, 0), -1)
     cv2.circle(orig, (int(trbrX), int(trbrY)), 5, (255, 0, 0), -1)
 
-    # draw lines between the midpoints
+    # draw lines from the midpoints
     cv2.line(orig, (int(tltrX), int(tltrY)), (int(blbrX), int(blbrY)),
              (255, 0, 255), 2)
     cv2.line(orig, (int(tlblX), int(tlblY)), (int(trbrX), int(trbrY)),
@@ -80,10 +76,7 @@ for c in contouring:
     dA = dist.euclidean((tltrX, tltrY), (blbrX, blbrY))
     dB = dist.euclidean((tlblX, tlblY), (trbrX, trbrY))
 
-    # if the pixels per metric has not been initialized, then
-    # compute it as the ratio of pixels to supplied metric
-    # (in this case, inches)
-    if pixelsPerMetric is None:
+    if pixelsPerMetric is None:                         #in inches, compute the ratio of pixels
         pixelsPerMetric = dB / args["width"]
 
     dimA = dA / pixelsPerMetric
@@ -97,8 +90,7 @@ for c in contouring:
                 (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX,
                 0.65, (255, 255, 255), 2)
 
-    # show the output image
-    cv2.imshow("Image", orig)
+    cv2.imshow("Image", orig)                           # show the outputs to user
     cv2.waitKey(0)
 
 '''
