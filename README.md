@@ -72,3 +72,5 @@ directly anywhere.
 https://pypi.org/project/face_recognition/
 
 https://github.com/ageitgey/face_recognition/issues/175
+
+https://www.pyimagesearch.com/2016/03/28/measuring-size-of-objects-in-an-image-with-opencv/
