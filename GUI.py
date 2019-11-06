@@ -35,6 +35,7 @@ def main():
     app = QtWidgets.QApplication(sys.argv)
 
     # Change palette to allow for for dark theme
+    # Breeze, Oxygen, QtCurve. Windows, Fusion
     app.setStyle('Fusion')
     palette = QPalette()
     palette.setColor(QPalette.Window, QColor(53, 53, 53))
