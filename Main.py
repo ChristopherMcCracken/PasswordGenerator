@@ -41,7 +41,8 @@ def run():
         passwordSize = DEFAULT_PASSWORD_LENGTH
 
     print("Generating Password...\n")
-    url = grabUrl()
+    # url = grabUrl()
+    url = 'https://google.com'
     parsedURL = urlRegex(url)
     face = facial_recog.facialRecognition()
     key = generateKey(parsedURL, passwordSize, face)  # later on we will pass in more than just url into generateKey
