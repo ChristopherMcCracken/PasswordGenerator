@@ -75,3 +75,11 @@ https://github.com/ageitgey/face_recognition/issues/175
 Folder for more information from the link above: https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py
 
 https://www.pyimagesearch.com/2016/03/28/measuring-size-of-objects-in-an-image-with-opencv/
+
+Error when no camera is accessible:
+Traceback (most recent call last):
+  File "C:\Users\McCracken\PycharmProjects\PythonProject\Main.py", line 47, in run
+    face = facial_recog.facialRecognition()
+  File "C:\Users\McCracken\PycharmProjects\PythonProject\facial_recog.py", line 32, in facialRecognition
+    small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
+cv2.error: OpenCV(4.1.1) C:\projects\opencv-python\opencv\modules\imgproc\src\resize.cpp:3720: error: (-215:Assertion failed) !ssize.empty() in function 'cv::resize'
