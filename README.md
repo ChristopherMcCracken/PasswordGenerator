@@ -72,9 +72,15 @@ directly anywhere.
 https://pypi.org/project/face_recognition/
 
 https://github.com/ageitgey/face_recognition/issues/175
-Folder for more information from the link above: https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py
+
+**Folder for more information from the link above:**
+https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py
 
 https://www.pyimagesearch.com/2016/03/28/measuring-size-of-objects-in-an-image-with-opencv/
+
+https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+
+https://cryptography.io/en/latest/hazmat/primitives/key-derivation-functions/
 
 Error when no camera is accessible:
 Traceback (most recent call last):
