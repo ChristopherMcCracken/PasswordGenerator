@@ -42,8 +42,7 @@ def run():
         passwordSize = DEFAULT_PASSWORD_LENGTH
 
     print("Generating Password...\n")
-    # url = grabUrl()
-    url = 'https://google.com'
+    url = grabUrl()
     parsedURL = urlRegex(url)
 
     try:

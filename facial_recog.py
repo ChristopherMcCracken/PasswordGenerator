@@ -1,14 +1,35 @@
 import face_recognition     # can use this or possibly OpenCV as well
 import cv2                  # for webcams use
 import numpy as np          # for shapes, contouring, corners etc.
+import take_picture
 
 def facialRecognition():
     # Get a reference to webcam #0 (the default one)
     video_capture = cv2.VideoCapture(0)
 
     # Load the image of the user
-    userImage = face_recognition.load_image_file("me.jpg")
-    userFaceEncode = face_recognition.face_encodings(userImage)[0]
+    try:
+        userImage = face_recognition.load_image_file("user.jpg")
+    except FileNotFoundError:
+        if take_picture.takeUserImage():
+            userImage = face_recognition.load_image_file("user.jpg")
+        else:
+            # Release handle to the webcam
+            video_capture.release()
+            cv2.destroyAllWindows()
+
+            print('No image of user exists. Please provide one.')
+            exit()
+
+    try:
+        userFaceEncode = face_recognition.face_encodings(userImage)[0]
+    except IndexError:
+        # Release handle to the webcam
+        video_capture.release()
+        cv2.destroyAllWindows()
+
+        print('No face was detected in the image')
+        exit()
 
     # Create arrays of known face encodings and their names
     known_face_encodings = [
