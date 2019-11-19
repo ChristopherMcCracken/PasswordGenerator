@@ -4,11 +4,11 @@ from GenerateKey import generateKey
 from url_regex import urlRegex
 from config import getSiteLength
 import pyperclip
-import cv2          # import for the error catch
+import cv2  # import for the error catch
 
 
 # -------------------------------------------------------------------------------------------------------------------- #
-def run():
+def run(pin):
     print("Generating Password...\n")
     url = grabUrl()
     parsedURL = urlRegex(url)
@@ -20,7 +20,7 @@ def run():
     except cv2.error:
         print("ERROR: Camera is not accessible")
 
-    key = generateKey(parsedURL, passwordSize, face)  # later on we will pass in more than just url into generateKey
+    key = generateKey(parsedURL, passwordSize, face, pin)
     # strip b'' from key so it can be read in as string
     keyAsString = str(key)[2:-1]
 

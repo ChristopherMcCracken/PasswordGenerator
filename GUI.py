@@ -8,7 +8,12 @@ import Main
 # -------------------------------------------------------------------------------------------------------------------- #
 class Ui_Application(object):
 # -------------------------------------------------------------------------------------------------------------------- #
+    def getPin(self):
+        self.inputWindow = inputDialog()
+        pin = self.inputWindow.gettext("Enter your pin: ")
+        Main.run(pin)
 
+# -------------------------------------------------------------------------------------------------------------------- #
     def setupUi(self, Application):
         Application.setObjectName("Application")
         Application.resize(200, 100)  # Default size
@@ -20,14 +25,68 @@ class Ui_Application(object):
         self.gridLayout.addWidget(self.pushButton, 0, 0, 1, 1)
         self.pushButton.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.retranslateUi(Application)
-        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL("clicked()"), Main.run)
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL("clicked()"), self.getPin)
         QtCore.QMetaObject.connectSlotsByName(Application)
 
-    # -------------------------------------------------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------------------------------------------------- #
     def retranslateUi(self, Application):
         Application.setWindowTitle(
-            QtWidgets.QApplication.translate("Application", "Application", None, -1))
+        QtWidgets.QApplication.translate("Application", "Application", None, -1))
         self.pushButton.setText(QtWidgets.QApplication.translate("Application", "Generate Password", None, -1))
+
+
+# -------------------------------------------------------------------------------------------------------------------- #
+class inputDialog(QWidget):
+    def __init__(self, parent=None):
+        super(inputDialog, self).__init__(parent)
+
+        infoList = ['', '', '']
+
+        layout = QFormLayout()
+        self.btn = QPushButton("Choose from list")
+        self.btn.clicked.connect(self.getItem)
+
+        self.le = QLineEdit()
+        layout.addRow(self.btn, self.le)
+        self.btn1 = QPushButton("Get name")
+        self.btn1.clicked.connect(self.gettext)
+
+        self.le1 = QLineEdit()
+        layout.addRow(self.btn1, self.le1)
+        self.btn2 = QPushButton("Enter an integer")
+        self.btn2.clicked.connect(self.getint)
+
+        self.le2 = QLineEdit()
+        layout.addRow(self.btn2, self.le2)
+        self.setLayout(layout)
+        self.setWindowTitle("Title")
+
+# -------------------------------------------------------------------------------------------------------------------- #
+    def getItem(self, prompt="Enter an option: "):
+        items = ("P1", "P2", "P3", "P4")
+
+        item, ok = QInputDialog.getItem(self, prompt,
+                                        "List of Items", items, 0, False)
+
+        if ok and item:
+            self.le.setText(item)
+            return str(item)
+
+# -------------------------------------------------------------------------------------------------------------------- #
+    def gettext(self, prompt="Enter text: "):
+        text, ok = QInputDialog.getText(self, 'Text Input Dialog', prompt)
+
+        if ok:
+            self.le1.setText(str(text))
+            return str(text)
+
+# -------------------------------------------------------------------------------------------------------------------- #
+    def getint(self, prompt="Enter a number: "):
+        num, ok = QInputDialog.getInt(self, "Integer input dialog", prompt)
+
+        if ok:
+            self.le2.setText(str(num))
+            return int(num)
 
 
 # -------------------------------------------------------------------------------------------------------------------- #
