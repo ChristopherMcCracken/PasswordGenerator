@@ -16,7 +16,6 @@ def run(pin):
 
     try:
         face = facial_recog.facialRecognition()
-        return face
     except cv2.error:
         print("ERROR: Camera is not accessible")
 

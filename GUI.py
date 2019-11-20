@@ -10,7 +10,7 @@ class Ui_Application(object):
 # -------------------------------------------------------------------------------------------------------------------- #
     def getPin(self):
         self.inputWindow = inputDialog()
-        pin = self.inputWindow.gettext("Enter your pin: ")
+        pin = self.inputWindow.getint("Enter your pin: ")
         Main.run(pin)
 
 # -------------------------------------------------------------------------------------------------------------------- #
