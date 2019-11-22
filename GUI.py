@@ -11,12 +11,18 @@ class Ui_Application(object):
     def getPin(self):
         self.inputWindow = inputDialog()
         pin = self.inputWindow.getint("Enter your pin: ")
-        Main.run(pin)
+        self.getPin = QMainWindow()
+        self.getPin.resize(250, 125)
+        self.getPin.setWindowTitle("View Portfolio")
+        label = QtWidgets.QLabel(self.getPin)
+        label.setText(Main.run(pin))
+        label.adjustSize()
+        self.getPin.show()
 
 # -------------------------------------------------------------------------------------------------------------------- #
     def setupUi(self, Application):
         Application.setObjectName("Application")
-        Application.resize(200, 100)  # Default size
+        Application.resize(250, 125)  # Default size
         self.gridLayout = QtWidgets.QGridLayout(Application)
         self.gridLayout.setObjectName("gridLayout")
         self.pushButton = QtWidgets.QPushButton(Application)

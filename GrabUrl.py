@@ -16,9 +16,8 @@ def grabUrl():
     # time.sleep(.1)
 
     #selenium to grab current URL from Chrome browser
-    # will need chromedriver in the PATH for it to talk to chrome
-    # Can specify path to webdriver instead of adding to PATH
-    #driver = webdriver.Chrome('/Users/quintinbarrette/Downloads/chromedriver')     #leave blank to have it search within PATH to find chromedriver
+    # put chromewebdriver.exe inside of python scripts folder to run this, however this solution
+    #driver = webdriver.Chrome()     #leave blank to have it search within PATH to find chromedriver
     #url = driver.getCurrentUrl()
 
     #firefox implementation
