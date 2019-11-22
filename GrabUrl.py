@@ -18,14 +18,14 @@ def grabUrl():
     #selenium to grab current URL from Chrome browser
     # will need chromedriver in the PATH for it to talk to chrome
     # Can specify path to webdriver instead of adding to PATH
-    driver = webdriver.Chrome()     #leave blank to have it search within PATH to find chromedriver
-    url = driver.getCurrentUrl()
+    #driver = webdriver.Chrome('/Users/quintinbarrette/Downloads/chromedriver')     #leave blank to have it search within PATH to find chromedriver
+    #url = driver.getCurrentUrl()
 
     #firefox implementation
     #firefox_driver = webdriver.Firefox()
     #firefox_url = driver.getCurrentUrl()
 
     # Store URL
-    #url = pyperclip.paste()
+    url = pyperclip.paste()
     print("Your current url is: " + url + "\n")
     return url

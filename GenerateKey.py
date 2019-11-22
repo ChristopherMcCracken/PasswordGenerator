@@ -18,10 +18,10 @@ def generateKey(url, passwordSize, face, pin):
         backend=default_backend()
     )
 
-    kdf_key = base64.urlsafe_b64encode(kdf.derive(password))  # Can only use kdf once
+    key = base64.urlsafe_b64encode(kdf.derive(password))  # Can only use kdf once
 
     # Fernet is used to encode again as it provides extra security for the password
-    key = Fernet(kdf_key)
+    #key = Fernet(kdf_key)
     print(f'Your key is: {key}\n')
     return key
 
