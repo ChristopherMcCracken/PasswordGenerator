@@ -26,6 +26,10 @@ def urlRegex(url):
     # try to get the website and domain from the provided url
     try:
         fullWebsite = regexResults.group(3)
+
+        if fullWebsite == '':
+            raise AttributeError
+
         domain = regexResults.group(4)
 
         websiteResults = websiteNameRegex.search(fullWebsite)
