@@ -27,13 +27,13 @@ class Ui_Application(object):
         self.readMe.setWindowTitle("Instructions")
         self.label = QtWidgets.QLabel(self.readMe)
         self.label.setText("For first time use:\n" 
-                           "1) Ensure URL of desired website to access is copied to clipboard.\n"
+                           "1) Ensure desired website is most recent tab prior to clicking generate password.\n"
                            "2) Click 'Generate Password'.\n"
                            "3) Set unique pin when prompted.\n"
                            "4) Camera application will pop up. Look towards camera and press space to store picture of yourself, this will be used for generation and authentication.\n"
                            "5) Your unique password for desired website will be copied to clipboard. Set this as your new password for desired website.\n\n"
                            "For subsequent use:\n"
-                           "1) Ensure URL of desired website to access is copied to clipboard.\n"
+                           "1) Ensure desired website is most recent tab prior to clicking generate password.\n"
                            "2) Click 'Generate Password'\n"
                            "3) Enter same pin as inputted during setup\n"
                            "4) Look towards camera and password will be generated and pasted to your clipboard\n"
