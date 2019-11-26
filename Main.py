@@ -24,6 +24,6 @@ def run(pin):
     keyAsString = str(key)[2:-1]
     pyperclip.copy(keyAsString)
     print("Your password for " + url + " is: " + keyAsString)
-    return "Your unique password for: \n" + url + "\nhas been copied to clipboard."
+    return "Your unique password for:\n" + url + "\nhas been copied to clipboard."
 
 # -------------------------------------------------------------------------------------------------------------------- #
