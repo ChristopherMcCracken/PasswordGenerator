@@ -12,33 +12,87 @@ class Ui_Application(object):
         self.inputWindow = inputDialog()
         pin = self.inputWindow.getint("Enter your pin: ")
         self.getPin = QMainWindow()
-        self.getPin.resize(250, 125)
-        self.getPin.setWindowTitle("View Portfolio")
-        label = QtWidgets.QLabel(self.getPin)
-        label.setText(Main.run(pin))
-        label.adjustSize()
+        self.getPin.resize(1000, 500)
+        self.getPin.setWindowTitle("Insert Pin")
+        self.label = QtWidgets.QLabel(self.getPin)
+        self.label.setText(Main.run(pin))
+        self.label.setStyleSheet("QLabel {font: 15pt Times New Roman}")
+        self.label.adjustSize()
         self.getPin.show()
 
 # -------------------------------------------------------------------------------------------------------------------- #
+    def instructions(self):
+        self.readMe = QMainWindow()
+        self.readMe.resize(1000, 500)
+        self.readMe.setWindowTitle("Instructions")
+        self.label = QtWidgets.QLabel(self.readMe)
+        self.label.setText("For first time use:\n" 
+                           "1) Ensure URL of desired website to access is copied to clipboard.\n"
+                           "2) Click 'Generate Password'.\n"
+                           "3) Set unique pin when prompted.\n"
+                           "4) Camera application will pop up. Look towards camera and press space to store picture of yourself, this will be used for generation and authentication.\n"
+                           "5) Your unique password for desired website will be copied to clipboard. Set this as your new password for desired website.\n\n"
+                           "For subsequent use:\n"
+                           "1) Ensure URL of desired website to access is copied to clipboard.\n"
+                           "2) Click 'Generate Password'\n"
+                           "3) Enter same pin as inputted during setup\n"
+                           "4) Look towards camera and password will be generated and pasted to your clipboard\n"
+                           "5) Paste password into website.")
+        self.label.setStyleSheet("QLabel {font: 15pt Times New Roman}")
+        self.label.adjustSize()
+        self.readMe.show()
+
+# -------------------------------------------------------------------------------------------------------------------- #
     def setupUi(self, Application):
+
         Application.setObjectName("Application")
-        Application.resize(250, 125)  # Default size
+        Application.resize(1000, 500)  # Default size
         self.gridLayout = QtWidgets.QGridLayout(Application)
         self.gridLayout.setObjectName("gridLayout")
+
+        # Top Label
+        self.label = QtWidgets.QLabel(Application)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label.setStyleSheet("QLabel {font: 20pt Times New Roman}")
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+
+        # Line for visual separation
+        self.line = QtWidgets.QFrame(Application)
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.gridLayout.addWidget(self.line, 1, 0, 1, 1)
+
+        # Generate Button
         self.pushButton = QtWidgets.QPushButton(Application)
-        self.pushButton.setStyleSheet("")
         self.pushButton.setObjectName("pushButton")
-        self.gridLayout.addWidget(self.pushButton, 0, 0, 1, 1)
+        self.pushButton.setStyleSheet('QPushButton {font: 20pt Times New Roman}')
+        self.gridLayout.addWidget(self.pushButton, 2, 0, 1, 1)
         self.pushButton.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        # Read Me
+        self.pushButton_2 = QtWidgets.QPushButton(Application)
+        self.pushButton_2.setObjectName("pushButton")
+        self.pushButton_2.setStyleSheet('QPushButton {font: 20pt Times New Roman}')
+        self.gridLayout.addWidget(self.pushButton_2, 3, 0, 1, 1)
+        self.pushButton_2.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.retranslateUi(Application)
+
         QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL("clicked()"), self.getPin)
+        QtCore.QObject.connect(self.pushButton_2, QtCore.SIGNAL("clicked()"), self.instructions)
         QtCore.QMetaObject.connectSlotsByName(Application)
 
 # -------------------------------------------------------------------------------------------------------------------- #
     def retranslateUi(self, Application):
         Application.setWindowTitle(
-        QtWidgets.QApplication.translate("Application", "Application", None, -1))
+        QtWidgets.QApplication.translate("Application", "Unique Password Generator", None, -1))
+        # Top Label
+        self.label.setText(QtWidgets.QApplication.translate("Application", "Unique Password Generator", None, -1))
+        # Generate Button
         self.pushButton.setText(QtWidgets.QApplication.translate("Application", "Generate Password", None, -1))
+        # Instructions Button
+        self.pushButton_2.setText(QtWidgets.QApplication.translate("Application", "Instructions", None, -1))
 
 
 # -------------------------------------------------------------------------------------------------------------------- #
@@ -49,34 +103,19 @@ class inputDialog(QWidget):
         infoList = ['', '', '']
 
         layout = QFormLayout()
-        self.btn = QPushButton("Choose from list")
-        self.btn.clicked.connect(self.getItem)
 
-        self.le = QLineEdit()
-        layout.addRow(self.btn, self.le)
         self.btn1 = QPushButton("Get name")
         self.btn1.clicked.connect(self.gettext)
-
         self.le1 = QLineEdit()
         layout.addRow(self.btn1, self.le1)
+
         self.btn2 = QPushButton("Enter an integer")
         self.btn2.clicked.connect(self.getint)
-
         self.le2 = QLineEdit()
         layout.addRow(self.btn2, self.le2)
+
         self.setLayout(layout)
         self.setWindowTitle("Title")
-
-# -------------------------------------------------------------------------------------------------------------------- #
-    def getItem(self, prompt="Enter an option: "):
-        items = ("P1", "P2", "P3", "P4")
-
-        item, ok = QInputDialog.getItem(self, prompt,
-                                        "List of Items", items, 0, False)
-
-        if ok and item:
-            self.le.setText(item)
-            return str(item)
 
 # -------------------------------------------------------------------------------------------------------------------- #
     def gettext(self, prompt="Enter text: "):
