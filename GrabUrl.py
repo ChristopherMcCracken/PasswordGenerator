@@ -1,7 +1,7 @@
 import time
 import keyboard as keyboard
 import pyperclip
-from selenium import webdriver
+# from selenium import webdriver
 
 
 def grabUrl():

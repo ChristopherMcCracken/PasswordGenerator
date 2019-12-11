@@ -26,6 +26,7 @@ class Ui_Application(object):
         self.readMe.resize(1000, 500)
         self.readMe.setWindowTitle("Instructions")
         self.label = QtWidgets.QLabel(self.readMe)
+        self.label.setWordWrap(True)
         self.label.setText("For first time use:\n" 
                            "1) Ensure desired website is most recent tab prior to clicking generate password.\n"
                            "2) Click 'Generate Password'.\n"
