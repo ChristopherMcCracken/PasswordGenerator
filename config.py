@@ -36,20 +36,31 @@ def getSiteLength(site):
         else:
             return siteLength
     else:
-        updateConfigFile(site)
+        updateConfigFile('Sites', site)
         return DEFAULT_PASSWORD_LENGTH
 
-def updateConfigFile(site):
+
+def updateConfigFile(type, data):
     """
     updates the config file with the site length
     """
     configUpdate = configparser.RawConfigParser()
     configUpdate.read(CONFIG_FILE_NAME)
+    print(data)
+    # This block is not entered when desired
+    if data in configUpdate[type]:
+        return True
 
-    configUpdate.set('Sites', site, DEFAULT_PASSWORD_LENGTH)
+    if type is 'Sites':
+        configUpdate.set(type, data, DEFAULT_PASSWORD_LENGTH)
+
+    elif type is 'MacAddresses':
+        configUpdate.set(type, data)
 
     with open(CONFIG_FILE_NAME, 'w') as configfile:
         configUpdate.write(configfile)
+
+
 
 def createConfigFile():
     """

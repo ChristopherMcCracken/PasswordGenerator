@@ -2,14 +2,14 @@ import base64
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.fernet import Fernet
+import uuid  # Used to grab Mac Address
+import config
 
 
-def generateKey(url, passwordSize, face, pin):
-    password_provided = face   # This is input in the form of a string
+def generateKey(url, passwordSize, face, pin, macAddress=''):
     password = face
-    # password = password_provided.encode()  # Convert to type bytes
-    salt = str(url).encode() + str(pin).encode()  # might also want to make this unique per each password
+
+    salt = str(url).encode() + str(pin).encode() + str(macAddress).encode()
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
         length=passwordSize,
