@@ -5,6 +5,7 @@ The file can be modified incase users want a longer or shorter password
 
 import configparser
 from os import path
+import uuid
 
 CONFIG_FILE_NAME = 'config.ini'
 MIN_PASSWORD_LENGTH = 7
@@ -39,34 +40,56 @@ def getSiteLength(site):
         updateConfigFile('Sites', site)
         return DEFAULT_PASSWORD_LENGTH
 
+def getMACAddress():
+    """
+    Attempts to get the MAC address from the config file. If it is unable to, it will update or
+    create the config file to store the MAC address.
+    """
 
-def updateConfigFile(type, data):
+    macConfigName = 'MAC'
+
+    if not path.isfile(CONFIG_FILE_NAME):
+        createConfigFile()
+
+    config = configparser.ConfigParser()
+    config.read(CONFIG_FILE_NAME)
+
+    if macConfigName in config['MacAddresses']:
+        # if wanted, we can do some try and catch here
+        macAddress = config.get('MacAddresses', macConfigName)
+        return macAddress
+    else:
+        updateConfigFile('MacAddresses', macConfigName)
+        return macAddressGeneration()
+
+def macAddressGeneration():
+    currentMACAddress = str(hex(uuid.getnode()).encode())
+    return currentMACAddress
+
+def updateConfigFile(configType, data):
     """
     updates the config file with the site length
     """
     configUpdate = configparser.RawConfigParser()
     configUpdate.read(CONFIG_FILE_NAME)
-    print(data)
-    # This block is not entered when desired
-    if data in configUpdate[type]:
-        return True
 
-    if type is 'Sites':
-        configUpdate.set(type, data, DEFAULT_PASSWORD_LENGTH)
+    if configType == 'Sites':
+        configUpdate.set(configType, data, DEFAULT_PASSWORD_LENGTH)
 
-    elif type is 'MacAddresses':
-        configUpdate.set(type, data)
+    elif configType == 'MacAddresses':
+        macAddress = macAddressGeneration()
+        configUpdate.set(configType, data, macAddress)
 
     with open(CONFIG_FILE_NAME, 'w') as configfile:
         configUpdate.write(configfile)
-
-
 
 def createConfigFile():
     """
     creates the config file if it doesn't exist
     """
     configCreation = configparser.RawConfigParser()
+
+    configCreation.add_section('MacAddresses')
 
     configCreation.add_section('Sites')
 

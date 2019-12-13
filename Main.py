@@ -2,8 +2,7 @@ import facial_recog
 from GrabUrl import grabUrl
 from GenerateKey import generateKey
 from url_regex import urlRegex
-import config
-from config import getSiteLength
+from config import getSiteLength, getMACAddress
 import pyperclip
 import cv2  # import for the error catch
 import uuid
@@ -12,8 +11,14 @@ import uuid
 def run(pin):
     print("Generating Password...\n")
 
+    currentMACAddress = str(hex(uuid.getnode()).encode())
+
+    print(type(currentMACAddress))
+    print(type(getMACAddress()))
+    print(currentMACAddress == getMACAddress())
     # This if block should return true in current machine mac address is whitelisted in the config file
-    if config.updateConfigFile('MacAddresses', str(hex(uuid.getnode())).encode()):  # Program will only continue to generate a password if mac address is in config
+    if currentMACAddress == getMACAddress():  # Program will only continue to generate a password if mac address is in config
+        print('OHHHH YEAHHHH')
         url = grabUrl()
         parsedURL = urlRegex(url)
         passwordSize = getSiteLength(parsedURL)
