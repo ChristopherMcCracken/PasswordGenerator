@@ -1,8 +1,7 @@
 import sys
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2 import QtCore, QtWidgets
 from PySide2.QtGui import QPalette, QColor, Qt
-from PySide2.QtWidgets import QMainWindow, QApplication, QInputDialog, QWidget, QPushButton, QLabel, QFormLayout, \
-    QLineEdit, QSizePolicy
+from PySide2.QtWidgets import QMainWindow, QInputDialog, QWidget, QPushButton, QLabel, QFormLayout, QLineEdit, QSizePolicy
 import Main
 
 # -------------------------------------------------------------------------------------------------------------------- #
