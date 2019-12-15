@@ -1,6 +1,6 @@
 import facial_recog
 from GrabUrl import grabUrl
-from GenerateKey import generateKey
+from generate_password import generatePassword
 from url_regex import urlRegex
 from config import getSiteLength
 import pyperclip
@@ -19,10 +19,10 @@ def run(pin):
     except cv2.error:
         print("ERROR: Camera is not accessible")
 
-    key = generateKey(parsedURL, passwordSize, face, pin)
-    # strip b'' from key so it can be read in as string
-    keyAsString = str(key)[2:-1]
-    pyperclip.copy(keyAsString)
-    print("Your password for " + parsedURL + " is: " + keyAsString)
+    password = generatePassword(parsedURL, passwordSize, face, pin)
+    # strip b'' from password so it can be read in as string
+    passwordAsString = str(password)[2:-1]
+    pyperclip.copy(passwordAsString)
+    print("Your password for " + parsedURL + " is: " + passwordAsString)
     return "Your unique password for:\n" + parsedURL + "\nhas been copied to clipboard."
 # -------------------------------------------------------------------------------------------------------------------- #
