@@ -1,4 +1,4 @@
-# PythonProject
+# Password Generator
 
 **1 Objective:** 
 
